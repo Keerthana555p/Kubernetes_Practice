@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: volume-container
+spec:
+
+  containers:
+  - name: ip-app
+    image: harshajain/ip_app:2 
+    ports:
+    - containerPort: 80
+    volumeMounts: 
+    - name: pvc-vol
+      mountPath: "/var/log/nginx"
+  
+  volumes:
+  - name: pvc-vol
+    persistentVolumeClaim: 
+        claimName: ebs-pvc
+
+
+---
+
+apiVersion: v1 
+kind: PersistentVolumeClaim
+metadata:
+    name: ebs-pvc
+spec: 
+    storageClassName: ebs-sc 
+    accessModes: 
+    - ReadWriteOnce
+    resources:
+       requests:
+          storage: 8Gi
+
+
+---
+apiVersion: storage.k8s.io/v1 
+kind: StorageClass 
+metadata:
+    name: ebs-sc
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer 
+reclaimPolicy: Retain   
+allowVolumeExpansion: true   
+parameters: 
+   type: gp3 
+   fsType: ext4 
+
+
