@@ -1,6 +1,20 @@
 name: Let me learn github actions
-on:                                        ##used for trigger 
-  push:                                    ##trigger method
+
+on:
+  push:
+
 jobs:
   hello:
-     runs-on: ubuntu-22.04                 ##github repo/local machine/any
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Print hello
+      run: echo "Hello world"
+
+    - name: Scan code
+      run: echo "Scanning code..."
+
+    - name: Build CI pipeline
+      run: echo "Building pipeline..."
