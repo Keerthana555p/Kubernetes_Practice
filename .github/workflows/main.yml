@@ -1,0 +1,6 @@
+name: Introduction to github actions
+on:
+  push:
+jobs:
+  hello:
+     runs-on: ubuntu-22.04 #github repo/local machine/any
