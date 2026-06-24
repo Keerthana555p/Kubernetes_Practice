@@ -1,6 +1,6 @@
-name: Introduction to github actions
-on:
-  push:
+name: Let me learn github actions
+on:                                        ##used for trigger 
+  push:                                    ##trigger method
 jobs:
   hello:
-     runs-on: ubuntu-22.04 #github repo/local machine/any
+     runs-on: ubuntu-22.04                 ##github repo/local machine/any
